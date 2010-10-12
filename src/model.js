@@ -17,7 +17,7 @@ var Model = function(name, class_methods, instance_methods) {
 
   // Apply class methods and extend with any custom class methods. Make sure
   // vitals are added last so they can't be overridden.
-  jQuery.extend(model, Model.Callbacks, Model.ClassMethods, class_methods, {
+  jQuery.extend(model, Model.Callbacks, Model.ClassMethods, Model.Relationship, class_methods, {
     _name: name,
     collection: [],
 
