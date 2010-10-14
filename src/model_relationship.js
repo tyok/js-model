@@ -5,7 +5,6 @@ Model.Relationship = (function() {
 
         // instance func
         var getMany = function(model) {
-            console.log(this)
             var id = this.id();
             var fkey = this.constructor._name + "_id";
 
@@ -15,8 +14,9 @@ Model.Relationship = (function() {
         // instance func
         var getOwner = function(model) {
             var fkey = model._name + "_id";
+            var self = this;
 
-            return model.detect(function() { return this.id() == fkey });
+            return model.detect(function() { return this.id() == self.attr(fkey) });
         };
 
         // class func
