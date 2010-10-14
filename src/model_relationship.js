@@ -20,21 +20,23 @@ Model.Relationship = (function() {
         };
 
         // class func
-        var hasMany = function(model) {
+        var hasMany = function(model, alias) {
             if (! "_name" in model) return;
 
             // add func to prototype
-            this.prototype[model._name] = function() { return getMany.call(this, model) };
+            var funcName = alias? alias: model._name;
+            this.prototype[funcName] = function() { return getMany.call(this, model) };
 
             return this;
         };
 
         // class func
-        var belongsTo = function(model) {
+        var belongsTo = function(model, alias) {
             if (! "_name" in model) return;
 
             // add func to 'prototype'
-            this.prototype[model._name] = function() { return getOwner.call(this, model) };
+            var funcName = alias? alias: model._name;
+            this.prototype[funcName] = function() { return getOwner.call(this, model) };
 
             return this;
         };
