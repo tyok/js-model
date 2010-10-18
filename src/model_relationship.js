@@ -1,8 +1,5 @@
 Model.Relationship = (function() {
 
-        var rel = {};
-        var related = {};
-
         // instance func
         var getMany = function(model) {
             var id = this.id();
@@ -34,13 +31,14 @@ Model.Relationship = (function() {
         var belongsTo = function(model, alias) {
             if (! "_name" in model) return;
 
-            // add func to 'prototype'
+            // add func to prototype
             var funcName = alias? alias: model._name;
             this.prototype[funcName] = function() { return getOwner.call(this, model) };
 
             return this;
         };
 
+        // this will be added to model class
         return {
             hasMany: hasMany,
             belongsTo: belongsTo
